@@ -1,0 +1,22 @@
+#include <stdio.h>
+void main()
+{
+    int num;
+    int fator_atual = 2;
+    scanf("%d",&num);
+    printf("Decompondo %d, temos: ",num);
+    while (num > 1 )
+    {
+        if (num % fator_atual == 0)
+        {
+            num = num / fator_atual;
+            printf("%d",fator_atual);
+            if (num >1)
+                printf(".");
+            else
+                printf("\n");
+        }
+    else
+        fator_atual ++;
+    }
+}
