@@ -1,0 +1,97 @@
+#include <stdio.h>
+
+int main (){
+
+int a , m,aux =1,q[1000] = {0} ,i=0,a1,b,m1,inverso,mdc = 0 ,d;
+int coeficiente(int o[],int x);
+printf("digite o valor de A e b e depois o do modulo M\n");
+scanf("%d%d%d",&a,&b ,&m);
+a1=a;
+m1=m;
+
+
+while( aux != 0 ){
+    aux = a%m;
+    if (aux !=0)
+    {
+        q[i] = a/m;
+        i++;
+    }
+
+    a = m;
+    m = aux;
+     
+}
+d =a;
+
+
+
+if (b % d == 0)
+{
+printf("Sao solução de %d congruente a %d mod(%d):\n",a1 ,b ,m1);
+
+a = a1/d;
+b = b/ d;
+m = m1/d;
+
+a1=a;
+m1=m;
+
+
+
+while( aux != 0 ){
+    aux = a%m;
+    if (aux !=0)
+    {
+        q[i] = a/m;
+        i++;
+    }
+
+    a = m;
+    m = aux;
+     
+}
+
+i %2 == 0 ? (inverso = (coeficiente( q,i-1) ) * -1) : (inverso = coeficiente( q,i-1) );
+
+(inverso > 0 && inverso < m1 ) ? inverso *=b : (inverso = ((inverso + m1 )*b) % m1);
+
+
+
+for ( i = 0; i < d; i++)
+{
+
+printf("%d \n", inverso + (m1*i)) ;
+
+}
+
+}
+
+
+else
+{
+    printf("\nnao tem soluçao ");
+}
+
+
+return 0;
+
+
+}
+
+int coeficiente(int q[],int i) {
+
+int res =1,aux=0,antes;
+        
+    while (i > 0 )
+    {
+
+        antes=res;
+        res = (res* q[i]) + aux;
+        aux = antes;
+        i--;
+
+    }
+return res;
+
+}
