@@ -1,7 +1,7 @@
 # ListaPratica
 - Integrantes da equipe:
-  Gabriel Barbosa
-  Claudemir Macêdo 
-  Kelvin 
-  Luiz Antonio
-  Nicollas
+  Gabriel Barbosa Dos Santos Martiliano;
+  Claudemir Macêdo dos Santos Júnior;
+  Kelvin Santos de Almeida Lima;
+  Luiz Antonio Marques Guimarães;
+  Nicollas Provatti.
