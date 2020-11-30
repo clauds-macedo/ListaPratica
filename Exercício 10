@@ -1,0 +1,106 @@
+#include <stdio.h>
+
+int main (){
+
+int n ;
+printf("\nDigite a quantidade de congruencia \n");
+scanf("%d",&n);
+
+int a[n] , m[n],aux =1,q[1000]  ,i,m1,c;
+int resto[n],solu[n],modulo =1 ,M[n],result =0; 
+int coeficiente(int o[],int x);
+
+
+
+
+for (int  k = 0; k < n; k++)
+{
+
+printf("Digite o do %d° resto e depois o mod m\n",k+1);
+ scanf("%d%d",&resto[k],&m[k]);
+modulo *= m[k];
+
+
+}
+
+
+for (  c = 0; c < n ; c++)
+{
+i=0;
+aux =1;
+M[c] = modulo/m[c];
+
+a[c]=M[c];
+m1 = m[c];
+
+while( aux != 0 ){
+    aux = a[c]%m[c];
+    if (aux !=0)
+    {
+        q[i] = a[c]/m[c];
+        i++;
+    }
+
+    a[c] = m[c];
+    m[c] = aux;
+
+}
+
+ if (a[c] > 1)
+ {    
+     printf("nAO sao primos entre si");
+
+     break;
+    
+ }
+ 
+
+i %2 == 0 ? (solu[c]= (coeficiente( q,i-1) ) * -1) : (solu[c] = coeficiente( q,i-1) );
+
+
+(solu[c] > 0 && solu[c]  < m1 ) ? solu[c] : (solu[c]  = (solu[c]  + m1 ) % m1);
+result += solu[c] * M[c]* resto[c];
+    
+
+
+}
+
+if (c == n)
+{
+if (result > modulo)
+{
+    result = result % modulo;
+
+}
+
+
+printf("solução e %d",result);
+}
+
+else
+{
+    printf("\nnao a solução");
+}
+
+
+return 0;
+}
+
+
+
+int coeficiente(int q[],int i) {
+
+int res =1,aux=0,antes;
+        
+    while (i > 0 )
+    {
+
+        antes=res;
+        res = (res* q[i]) + aux;
+        aux = antes;
+        i--;
+
+    }
+return res;
+
+}
