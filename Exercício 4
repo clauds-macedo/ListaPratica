@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int mdcf(int a, int b){
+    //b = a.n+q
+    int n,q;
+    int aux=0;
+    if (b>a){
+        aux = b;
+        b = a;
+        a = aux;
+    }
+    do{
+        int n = b/a;
+        int q = b%a;
+        b = a;
+        a = q;
+        if (q==0){
+            return b;
+        }
+    }while(n!=0);
+    return a;
+}
+int mmcf(int a, int b){
+    int mdc = mdcf(a,b);
+    int mmc = (a*b)/mdc;
+}
+
+int main() {
+
+    int a,b, mdc;
+
+    printf("Para calcular o MDC de a e b, digite um valor para a: \n");
+    scanf("%d", &a);
+    printf("Agora, um valor para b: \n");
+    scanf("%d", &b);
+
+    mdc = mdcf(a,b);
+    printf("MDC (%d, %d) = %d\n", a,b,mdc);
+    int mmc = mmcf(a,b);
+    printf("MMC (%d, %d) = %d", a,b,mmc); 
+   return 0;
+}
