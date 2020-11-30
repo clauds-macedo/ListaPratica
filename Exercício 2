@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include<time.h>
+
+int main(){
+void primo (int i);
+time_t t,tf,tempo, i = 0;
+
+t= time(NULL);
+do{ 
+
+primo (i);
+tf= time(NULL);
+tempo = difftime(tf,t);
+i++;
+}while (  tempo<=60);
+
+
+
+
+
+
+
+
+
+}
+
+void primo (int i){
+
+if (i % 2 == 0 && i !=2)
+{
+  
+}
+else if (i % 3 == 0 && i !=3)
+{
+
+}
+else if (i % 5 == 0 && i !=5)
+{
+  
+}
+else if (i % 7 == 0 && i !=7)
+{
+   
+}
+else
+{
+    printf("%d\n",i);
+}
+
+
+
+}
