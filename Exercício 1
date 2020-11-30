@@ -1,0 +1,23 @@
+#include <stdio.h>
+ 
+int main() {
+ 
+    int num, verifica_primo, contador=0;
+    
+    printf("Digite um número: ");
+    scanf("%d", &verifica_primo);
+    
+    for (num=2; num<=verifica_primo/2; num++) {
+        if (verifica_primo%num == 0){
+        contador++;
+        }
+    }
+    
+    if (contador==0){
+        printf("É um número primo\n");
+    }
+    else{
+        printf("Não é um número primo\n");
+    }
+    return 0;
+}
