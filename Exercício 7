@@ -1,0 +1,133 @@
+#include <stdio.h>
+
+int maior(int n1, int n2) {
+	return n1 < n2 ? n2 : n1;
+}
+
+int menor(int n1, int n2) {
+	return n1 < n2 ? n1 : n2;
+}
+
+int hePar(int n) {
+	return n % 2 == 0 ? 1 : 0;
+}
+
+int modulo(int n) {
+	return n < 0 ? n * (-1) : n;
+}
+
+
+int getCoeficiente(int maior, int menor, int q){
+	if(menor*q > maior)
+		return q - 1;
+	else {
+		q += 1;
+		getCoeficiente(maior, menor, q);
+	}
+}
+
+void mdc(int coeficientes[], int tamanhoDoVetor[], int n1, int n2, int Valormdc[]) {
+	int numMaior = maior(n1, n2);
+	int numMenor = menor(n1, n2);
+	int resto;
+	int proxNumerador;
+	int e = 1;
+	coeficientes[0] = 0;
+
+	resto = numMaior % numMenor;
+	coeficientes[e] = getCoeficiente(numMaior, numMenor, 1);
+	proxNumerador = numMenor;
+	
+	for (int i = 0; 1 != 0 ; i++) {
+
+		if(resto == 0) {
+			Valormdc[0] = proxNumerador;
+			tamanhoDoVetor[0] = e + 1;
+			break;
+		}
+
+		int aux;
+		aux = proxNumerador;
+		proxNumerador = resto;
+		e++;
+		coeficientes[e] = getCoeficiente(aux, resto, 1);
+		resto = aux % resto;
+	}
+
+	// for (int i = 0; i <= e; i++) {
+	// 	printf("&&%i  ***%i\n", coeficientes[i], e + 1 );
+	// }
+	
+}
+
+void combinacaoLinear(int coeficientes[], int tamanhoDoVetor[], int n1, int n2) {
+	int numMaior = maior(n1, n2);
+	int numMenor = menor(n1, n2);
+	int tam = tamanhoDoVetor[0] - 2;
+	int beforeMult = 1;
+	int aux = 1;
+
+	for (int i = tam; i >= 0; --i){
+
+		if(i == tam){
+			coeficientes[i] = coeficientes[i] * aux;
+			beforeMult = aux;
+			aux = coeficientes[i];
+		}
+		else {
+			coeficientes[i] = coeficientes[i] * aux + beforeMult;
+			beforeMult = aux;
+			aux = coeficientes[i];
+		}
+	}
+	
+	if(hePar(tamanhoDoVetor[0] - 1)) {
+		coeficientes[1] *= -1;
+	} else {
+		coeficientes[0] *= -1;
+	}
+
+	// printf("\n@@%i,%i,%i,%i\n", coeficientes[0], coeficientes[1], coeficientes[2], coeficientes[3]);
+
+}
+
+
+int main() {
+
+	int coeficientes[300];
+	int Valormdc[1];
+	int inverso;
+
+	int var1, var2, tamanhoDoVetor[1];
+
+	while( 1 != 0) {
+		printf("Digite dois números");
+		scanf("%i", &var1);
+		scanf("%i", &var2);
+		mdc(coeficientes, tamanhoDoVetor,var1, var2, Valormdc);
+
+		if(Valormdc[0] != 1) {
+			printf("mdc != 1");
+			break;
+		}
+
+		combinacaoLinear(coeficientes,tamanhoDoVetor,var1, var2);
+
+		int numMaior = maior(var1, var2);
+		int numMenor = menor(var1, var2);
+		
+		// a*x = 1 mod m 
+		if((var1 * coeficientes[0] - 1) % var2 == 0) {
+			inverso = coeficientes[0];
+		} else {
+			inverso = coeficientes[1];
+		}
+
+		int MultMaior = modulo(coeficientes[0]) > modulo(coeficientes[1]) ? coeficientes[0] : coeficientes[1];
+		int MultMenor = modulo(coeficientes[0]) > modulo(coeficientes[1]) ? coeficientes[1] : coeficientes[0];
+
+		printf("O inverso de %i mod %i --> %i\n\n", var1, var2, inverso);		
+	}
+
+	return  0;
+}
