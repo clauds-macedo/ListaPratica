@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int mdc(int valor_1, int valor_2)
+{
+    int resto = valor_1 % valor_2;
+    printf("valor_1: %d   valor_2: %d   resto: %d\n",valor_1,valor_2,resto);
+    if (resto == 0)
+        return valor_2;
+    else
+        return mdc(valor_2, resto);
+}
+
+void main()
+{
+    printf("Digite os dois valores: ");
+    int valor_1, valor_2;
+    scanf("%d %d", &valor_1, &valor_2);
+    printf("MDC(%d,%d) = %d\n",valor_1, valor_2,mdc(valor_1, valor_2));
+}
